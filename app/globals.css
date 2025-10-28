@@ -135,3 +135,15 @@
         @apply bg-black text-white;
     }
 }
+
+/* Added utility class to hide scrollbar on mobile navigation */
+@layer utilities {
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+}

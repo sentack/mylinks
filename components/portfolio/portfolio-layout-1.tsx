@@ -7,6 +7,7 @@ import { ExperienceSection } from "./portfolio1/experience-section"
 import { EducationSection } from "./portfolio1/education-section"
 import { ProjectsSection } from "./portfolio1/projects-section"
 import { ContactSection } from "./portfolio1/contact-section"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 interface PortfolioLayout1Props {
   profile: any
@@ -17,39 +18,56 @@ export function PortfolioLayout1({ profile }: PortfolioLayout1Props) {
     <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
       {/* Sticky Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-center gap-8">
-          <a href="#about" className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition">
-            About
-          </a>
-          {profile.services && profile.services.length > 0 && (
-            <a href="#services" className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition">
-              Services
-            </a>
-          )}
-          {profile.work_experience && profile.work_experience.length > 0 && (
-            <a
-              href="#experience"
-              className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition"
-            >
-              Experience
-            </a>
-          )}
-          {profile.education && profile.education.length > 0 && (
-            <a
-              href="#education"
-              className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition"
-            >
-              Education
-            </a>
-          )}
-          {profile.projects && profile.projects.length > 0 && (
-            <a href="#projects" className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition">
-              Projects
-            </a>
-          )}
-          <a href="#contact" className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition">
-            Contact
-          </a>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex gap-4 sm:gap-8 overflow-x-auto scrollbar-hide flex-1">
+              <a
+                href="#about"
+                className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition whitespace-nowrap"
+              >
+                About
+              </a>
+              {profile.services && profile.services.length > 0 && (
+                <a
+                  href="#services"
+                  className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition whitespace-nowrap"
+                >
+                  Services
+                </a>
+              )}
+              {profile.work_experience && profile.work_experience.length > 0 && (
+                <a
+                  href="#experience"
+                  className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition whitespace-nowrap"
+                >
+                  Experience
+                </a>
+              )}
+              {profile.education && profile.education.length > 0 && (
+                <a
+                  href="#education"
+                  className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition whitespace-nowrap"
+                >
+                  Education
+                </a>
+              )}
+              {profile.projects && profile.projects.length > 0 && (
+                <a
+                  href="#projects"
+                  className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition whitespace-nowrap"
+                >
+                  Projects
+                </a>
+              )}
+              <a
+                href="#contact"
+                className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition whitespace-nowrap"
+              >
+                Contact
+              </a>
+            </div>
+            <ThemeToggle />
+          </div>
         </div>
       </nav>
 
@@ -114,9 +132,7 @@ export function PortfolioLayout1({ profile }: PortfolioLayout1Props) {
       {/* Footer */}
       <footer className="border-t border-gray-200 dark:border-gray-800 py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center text-gray-600 dark:text-gray-400 text-sm">
-          <p>
-            © {new Date().getFullYear()} MyLinks. All rights reserved.
-          </p>
+          <p>© {new Date().getFullYear()} MyLinks. All rights reserved.</p>
         </div>
       </footer>
     </div>

@@ -20,7 +20,7 @@ export function ContactSection({ email, phone, socialLinks }: ContactSectionProp
     ),
     twitter: (
       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M23.953 4.57a10 10 0 002.856-3.515 10 10 0 01-2.836.856 4.958 4.958 0 002.165-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417a9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+        <path d="M23.953 4.57a10 10 0 002.856-3.515 10 10 0 01-2.836.856 4.958 4.958 0 002.165-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
       </svg>
     ),
     linkedin: (
@@ -36,30 +36,38 @@ export function ContactSection({ email, phone, socialLinks }: ContactSectionProp
   }
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8">
+    <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-950/30 dark:via-purple-950/30 dark:to-pink-950/30">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold text-black dark:text-white mb-12">Get In Touch</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-8 sm:mb-12">
+          Get In Touch
+        </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
           {/* Contact Info */}
           <div className="space-y-6">
             {email && (
-              <div>
-                <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide mb-2">
+              <div className="p-4 sm:p-6 rounded-xl bg-white dark:bg-gray-900 border-2 border-indigo-200 dark:border-indigo-800 hover:shadow-lg transition-shadow">
+                <h3 className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wide mb-2">
                   Email
                 </h3>
-                <a href={`mailto:${email}`} className="text-lg text-blue-600 dark:text-blue-400 hover:underline">
+                <a
+                  href={`mailto:${email}`}
+                  className="text-base sm:text-lg text-indigo-600 dark:text-indigo-400 hover:underline break-all"
+                >
                   {email}
                 </a>
               </div>
             )}
 
             {phone && (
-              <div>
-                <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide mb-2">
+              <div className="p-4 sm:p-6 rounded-xl bg-white dark:bg-gray-900 border-2 border-purple-200 dark:border-purple-800 hover:shadow-lg transition-shadow">
+                <h3 className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wide mb-2">
                   Phone
                 </h3>
-                <a href={`tel:${phone}`} className="text-lg text-blue-600 dark:text-blue-400 hover:underline">
+                <a
+                  href={`tel:${phone}`}
+                  className="text-base sm:text-lg text-purple-600 dark:text-purple-400 hover:underline"
+                >
                   {phone}
                 </a>
               </div>
@@ -68,11 +76,11 @@ export function ContactSection({ email, phone, socialLinks }: ContactSectionProp
 
           {/* Social Links */}
           {socialLinks && Object.keys(socialLinks).length > 0 && (
-            <div>
-              <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide mb-4">
+            <div className="p-4 sm:p-6 rounded-xl bg-white dark:bg-gray-900 border-2 border-pink-200 dark:border-pink-800 hover:shadow-lg transition-shadow">
+              <h3 className="text-sm font-semibold text-pink-600 dark:text-pink-400 uppercase tracking-wide mb-4">
                 Follow
               </h3>
-              <div className="flex gap-4">
+              <div className="flex flex-wrap gap-3 sm:gap-4">
                 {Object.entries(socialLinks).map(
                   ([platform, url]) =>
                     url && (
@@ -81,7 +89,7 @@ export function ContactSection({ email, phone, socialLinks }: ContactSectionProp
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        className="p-3 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 transition-all hover:scale-110 shadow-md"
                       >
                         {SocialIcons[platform] || null}
                       </a>

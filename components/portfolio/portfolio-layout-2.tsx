@@ -1,7 +1,7 @@
 "use client"
-import { ExperienceSection } from "./experience-section"
-import { EducationSection } from "./education-section"
-import { ProjectsSection } from "./projects-section"
+import { ExperienceSection } from "./portfolio3/experience-section"
+import { EducationSection } from "./portfolio3/education-section"
+import { ProjectsSection } from "./portfolio3/projects-section"
 
 interface PortfolioLayout2Props {
   profile: any

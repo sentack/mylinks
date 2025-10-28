@@ -44,7 +44,6 @@ export default async function PublicProfilePage({ params }: PublicProfilePagePro
 
   return (
     <>
-      <Navbar />
       <main>{renderPortfolio()}</main>
     </>
   )

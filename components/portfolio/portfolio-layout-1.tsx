@@ -1,12 +1,12 @@
 "use client"
 
-import { HeroSection } from "./portfolio3/hero-section"
-import { AboutSection } from "./portfolio3/about-section"
-import { ServicesSection } from "./portfolio3/services-section"
-import { ExperienceSection } from "./portfolio3/experience-section"
-import { EducationSection } from "./portfolio3/education-section"
-import { ProjectsSection } from "./portfolio3/projects-section"
-import { ContactSection } from "./portfolio3/contact-section"
+import { HeroSection } from "./portfolio1/hero-section"
+import { AboutSection } from "./portfolio1/about-section"
+import { ServicesSection } from "./portfolio1/services-section"
+import { ExperienceSection } from "./portfolio1/experience-section"
+import { EducationSection } from "./portfolio1/education-section"
+import { ProjectsSection } from "./portfolio1/projects-section"
+import { ContactSection } from "./portfolio1/contact-section"
 
 interface PortfolioLayout1Props {
   profile: any

@@ -49,6 +49,9 @@ export function ProfileForm({ userId }: ProfileFormProps) {
     bio: "",
     avatar_url: "",
     display_type: "card",
+    username: "",
+    accent_color: "bg-blue-500",
+    background_theme: "light",
     social_links: {
       facebook: "",
       instagram: "",
@@ -64,13 +67,17 @@ export function ProfileForm({ userId }: ProfileFormProps) {
       const { data, error } = await supabase.from("profiles").select("*").eq("id", userId).single()
 
       if (error) {
-        console.error("Error fetching profile:", error)
+        console.error("[v0] Error fetching profile:", error)
       } else if (data) {
+        console.log("[v0] Profile data loaded:", data)
         setFormData({
           full_name: data.full_name || "",
           bio: data.bio || "",
           avatar_url: data.avatar_url || "",
           display_type: data.display_type || "card",
+          username: data.username || "",
+          accent_color: data.accent_color || "bg-blue-500",
+          background_theme: data.background_theme || "light",
           social_links: data.social_links || {
             facebook: "",
             instagram: "",
@@ -114,6 +121,17 @@ export function ProfileForm({ userId }: ProfileFormProps) {
     }))
   }
 
+  const removeSocialPlatform = (platform: string) => {
+    setFormData((prev) => {
+      const newSocialLinks = { ...prev.social_links }
+      delete newSocialLinks[platform as keyof typeof newSocialLinks]
+      return {
+        ...prev,
+        social_links: newSocialLinks,
+      }
+    })
+  }
+
   const addedPlatforms = ALL_PLATFORMS.filter(
     (platform) => formData.social_links[platform as keyof typeof formData.social_links],
   )
@@ -126,7 +144,29 @@ export function ProfileForm({ userId }: ProfileFormProps) {
     setSaving(true)
     setMessage(null)
 
+    if (!formData.username.trim()) {
+      setMessage({ type: "error", text: "Username is required" })
+      setSaving(false)
+      return
+    }
+
     const supabase = createBrowserSupabaseClient()
+
+    const cleanedSocialLinks = Object.fromEntries(
+      Object.entries(formData.social_links).filter(([, value]) => value && value.trim()),
+    )
+
+    console.log("[v0] Submitting profile update:", {
+      full_name: formData.full_name,
+      bio: formData.bio,
+      avatar_url: formData.avatar_url,
+      display_type: formData.display_type,
+      username: formData.username,
+      accent_color: formData.accent_color,
+      background_theme: formData.background_theme,
+      social_links: cleanedSocialLinks,
+    })
+
     const { error } = await supabase
       .from("profiles")
       .update({
@@ -134,7 +174,10 @@ export function ProfileForm({ userId }: ProfileFormProps) {
         bio: formData.bio,
         avatar_url: formData.avatar_url,
         display_type: formData.display_type,
-        social_links: formData.social_links,
+        username: formData.username,
+        accent_color: formData.accent_color,
+        background_theme: formData.background_theme,
+        social_links: cleanedSocialLinks,
         updated_at: new Date().toISOString(),
       })
       .eq("id", userId)
@@ -142,8 +185,10 @@ export function ProfileForm({ userId }: ProfileFormProps) {
     setSaving(false)
 
     if (error) {
-      setMessage({ type: "error", text: "Failed to save profile. Please try again." })
+      console.error("[v0] Profile update error:", error)
+      setMessage({ type: "error", text: `Failed to save profile: ${error.message}` })
     } else {
+      console.log("[v0] Profile updated successfully")
       setMessage({ type: "success", text: "Profile updated successfully!" })
       setTimeout(() => setMessage(null), 3000)
     }
@@ -155,6 +200,21 @@ export function ProfileForm({ userId }: ProfileFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
+      <div>
+        <label className="block mb-2 text-sm font-medium">Username</label>
+        <input
+          type="text"
+          name="username"
+          value={formData.username}
+          onChange={handleInputChange}
+          className="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg p-3 text-black dark:text-white transition-all duration-300"
+          placeholder="your-username"
+        />
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          This will be your public profile URL: /u/your-username
+        </p>
+      </div>
+
       {/* Full Name */}
       <div>
         <label className="block mb-2 text-sm font-medium">Full Name</label>
@@ -209,6 +269,38 @@ export function ProfileForm({ userId }: ProfileFormProps) {
         </select>
       </div>
 
+      {/* Accent Color */}
+      <div>
+        <label className="block mb-2 text-sm font-medium">Accent Color</label>
+        <select
+          name="accent_color"
+          value={formData.accent_color}
+          onChange={handleInputChange}
+          className="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg p-3 text-black dark:text-white transition-all duration-300"
+        >
+          <option value="bg-blue-500">Blue</option>
+          <option value="bg-purple-500">Purple</option>
+          <option value="bg-pink-500">Pink</option>
+          <option value="bg-green-500">Green</option>
+          <option value="bg-orange-500">Orange</option>
+          <option value="bg-red-500">Red</option>
+        </select>
+      </div>
+
+      {/* Background Theme */}
+      <div>
+        <label className="block mb-2 text-sm font-medium">Background Theme</label>
+        <select
+          name="background_theme"
+          value={formData.background_theme}
+          onChange={handleInputChange}
+          className="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg p-3 text-black dark:text-white transition-all duration-300"
+        >
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+
       {/* Social Links */}
       <div className="space-y-4">
         <div>
@@ -236,6 +328,13 @@ export function ProfileForm({ userId }: ProfileFormProps) {
                     placeholder={`https://${platform}.com/username`}
                   />
                 </div>
+                <button
+                  type="button"
+                  onClick={() => removeSocialPlatform(platform)}
+                  className="mt-6 px-3 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-all duration-300 text-sm font-medium"
+                >
+                  Remove
+                </button>
               </div>
             ))}
           </div>
@@ -244,18 +343,18 @@ export function ProfileForm({ userId }: ProfileFormProps) {
         {availablePlatforms.length > 0 && (
           <div className="space-y-3">
             <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">Add More Platforms</h4>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {availablePlatforms.map((platform) => (
                 <button
                   key={platform}
                   type="button"
                   onClick={() => addSocialPlatform(platform)}
-                  className="flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 capitalize text-sm font-medium"
+                  className="flex flex-col items-center justify-center gap-2 px-4 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/10 transition-all duration-300 capitalize text-sm font-medium group"
                 >
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                     {SocialIcons[platform as keyof typeof SocialIcons]}
                   </span>
-                  Add {platform}
+                  <span className="text-xs">{platform}</span>
                 </button>
               ))}
             </div>

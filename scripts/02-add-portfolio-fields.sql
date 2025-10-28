@@ -1,0 +1,26 @@
+-- Add new portfolio fields to profiles table for Part 7
+ALTER TABLE profiles
+ADD COLUMN IF NOT EXISTS services JSONB DEFAULT '[]',
+ADD COLUMN IF NOT EXISTS work_experience JSONB DEFAULT '[]',
+ADD COLUMN IF NOT EXISTS education JSONB DEFAULT '[]',
+ADD COLUMN IF NOT EXISTS projects JSONB DEFAULT '[]',
+ADD COLUMN IF NOT EXISTS layout_type INTEGER DEFAULT 1,
+ADD COLUMN IF NOT EXISTS cover_image TEXT;
+
+-- Update existing columns to ensure they exist
+ALTER TABLE profiles
+ADD COLUMN IF NOT EXISTS position TEXT,
+ADD COLUMN IF NOT EXISTS company_name TEXT,
+ADD COLUMN IF NOT EXISTS company_website TEXT,
+ADD COLUMN IF NOT EXISTS location TEXT,
+ADD COLUMN IF NOT EXISTS experience_years INTEGER DEFAULT 0,
+ADD COLUMN IF NOT EXISTS skills TEXT[] DEFAULT '{}',
+ADD COLUMN IF NOT EXISTS availability TEXT,
+ADD COLUMN IF NOT EXISTS portfolio_website TEXT,
+ADD COLUMN IF NOT EXISTS contact_email TEXT,
+ADD COLUMN IF NOT EXISTS phone_number TEXT,
+ADD COLUMN IF NOT EXISTS profile_picture_url TEXT,
+ADD COLUMN IF NOT EXISTS profile_view_type TEXT DEFAULT 'classic',
+ADD COLUMN IF NOT EXISTS accent_color VARCHAR(50) DEFAULT 'bg-blue-500',
+ADD COLUMN IF NOT EXISTS background_theme VARCHAR(20) DEFAULT 'light',
+ADD COLUMN IF NOT EXISTS username TEXT UNIQUE;

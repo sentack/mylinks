@@ -1,9 +1,16 @@
 "use client"
 
+import type React from "react"
+
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { createBrowserSupabaseClient } from "@/lib/supabase-browser"
 import { Navbar } from "@/components/navbar"
+import Card1 from "@/components/cards/card1"
+import Card2 from "@/components/cards/card2"
+import Card3 from "@/components/cards/card3"
+import Card4 from "@/components/cards/card4"
+import Card5 from "@/components/cards/card5"
 
 const ACCENT_COLORS = [
   { name: "Blue", value: "bg-blue-500" },
@@ -15,10 +22,20 @@ const ACCENT_COLORS = [
 ]
 
 const DISPLAY_TYPES = [
-  { name: "Card", value: "card" },
-  { name: "Minimal", value: "minimal" },
-  { name: "Detailed", value: "detailed" },
+  { name: "Split Edge", value: "1" },
+  { name: "Elegant Wave", value: "2" },
+  { name: "Curved Accent", value: "3" },
+  { name: "Geometric Blend", value: "4" },
+  { name: "Angular Modern", value: "5" },
 ]
+
+const cards = {
+  "1": Card1,
+  "2": Card2,
+  "3": Card3,
+  "4": Card4,
+  "5": Card5,
+}
 
 export default function CustomizePage() {
   const router = useRouter()
@@ -28,10 +45,11 @@ export default function CustomizePage() {
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
   const [profile, setProfile] = useState<any>(null)
+  const [logoPreview, setLogoPreview] = useState<string | null>(null)
   const [customization, setCustomization] = useState({
     accent_color: "bg-blue-500",
     background_theme: "light",
-    display_type: "card",
+    display_type: "1",
   })
 
   useEffect(() => {
@@ -53,10 +71,11 @@ export default function CustomizePage() {
 
       if (profileData) {
         setProfile(profileData)
+        setLogoPreview(profileData.logo_url || null)
         setCustomization({
           accent_color: profileData.accent_color || "bg-blue-500",
           background_theme: profileData.background_theme || "light",
-          display_type: profileData.display_type || "card",
+          display_type: profileData.display_type || "1",
         })
       }
 
@@ -65,6 +84,27 @@ export default function CustomizePage() {
 
     checkAuth()
   }, [router])
+
+  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    // Validate file type
+    if (file.type !== "image/png") {
+      setMessage({ type: "error", text: "Please upload a PNG file only." })
+      return
+    }
+
+    // Create preview URL
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      const result = event.target?.result as string
+      setLogoPreview(result)
+      setMessage({ type: "success", text: "Logo preview updated!" })
+      setTimeout(() => setMessage(null), 2000)
+    }
+    reader.readAsDataURL(file)
+  }
 
   const handleSave = async () => {
     if (!user) return
@@ -115,6 +155,9 @@ export default function CustomizePage() {
     )
   }
 
+  const SelectedCard = cards[customization.display_type as keyof typeof cards] || Card1
+  const profileWithLogo = { ...profile, logo_url: logoPreview || profile.logo_url }
+
   return (
     <>
       <Navbar />
@@ -130,9 +173,45 @@ export default function CustomizePage() {
                 </p>
               </div>
 
+              {/* Logo Upload */}
+              <div className="space-y-4">
+                <h2 className="text-lg font-semibold">Company Logo</h2>
+                <div className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg p-6 text-center">
+                  <input
+                    type="file"
+                    accept="image/png"
+                    onChange={handleLogoUpload}
+                    className="hidden"
+                    id="logo-upload"
+                  />
+                  <label htmlFor="logo-upload" className="cursor-pointer block">
+                    <svg
+                      className="w-8 h-8 mx-auto mb-2 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                    <p className="text-sm font-medium">Click to upload PNG logo</p>
+                    <p className="text-xs text-gray-500 mt-1">PNG files only</p>
+                  </label>
+                  {logoPreview && (
+                    <div className="mt-4">
+                      <img
+                        src={logoPreview || "/placeholder.svg"}
+                        alt="Logo preview"
+                        className="w-16 h-16 mx-auto object-contain"
+                      />
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">Logo preview loaded</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
               {/* Display Type Selection */}
               <div className="space-y-4">
-                <h2 className="text-lg font-semibold">Display Type</h2>
+                <h2 className="text-lg font-semibold">Card Design</h2>
                 <div className="space-y-2">
                   {DISPLAY_TYPES.map((type) => (
                     <label key={type.value} className="flex items-center gap-3 cursor-pointer">
@@ -239,6 +318,11 @@ export default function CustomizePage() {
                     : "bg-white border border-gray-300"
                 }`}
               >
+                <SelectedCard
+                  profile={profileWithLogo}
+                  accentColor={customization.accent_color}
+                  backgroundTheme={customization.background_theme}
+                />
               </div>
             </div>
           </div>

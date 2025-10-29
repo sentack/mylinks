@@ -66,6 +66,9 @@ export function Navbar() {
                 <Link href="/profile" className="text-black dark:text-white hover:opacity-70 transition-opacity">
                   Profile
                 </Link>
+                <Link href="/card" className="text-black dark:text-white hover:opacity-70 transition-opacity">
+                  Business Card
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="text-black dark:text-white hover:opacity-70 transition-opacity"

@@ -1,15 +1,15 @@
 "use client"
 
 interface ViewSelectorProps {
-  selectedView: "classic" | "minimal" | "carded"
-  onViewChange: (view: "classic" | "minimal" | "carded") => void
+  selectedView: number
+  onViewChange: (view: number) => void
 }
 
 export function ViewSelector({ selectedView, onViewChange }: ViewSelectorProps) {
   const views = [
-    { id: "classic", label: "Classic", description: "Centered, elegant layout" },
-    { id: "minimal", label: "Minimal", description: "Clean and simple" },
-    { id: "carded", label: "Carded", description: "Modern with accent bar" },
+    { id: 1, label: "Portfolio 1", description: "Centered, elegant layout" },
+    { id: 2, label: "Portfolio 2", description: "Clean and simple" },
+    { id: 3, label: "Portfolio 3", description: "Modern with accent bar" },
   ] as const
 
   return (

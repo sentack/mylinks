@@ -64,7 +64,7 @@ export function RefinedProfileForm({ userId }: RefinedProfileFormProps) {
     contact_email: "",
     phone_number: "",
     profile_picture_url: "",
-    profile_view_type: "classic" as "classic" | "minimal" | "modern",
+    profile_view_type: 1,
     accent_color: "bg-blue-500",
     background_theme: "light" as "light" | "dark",
     work_experience: [] as Array<{
@@ -280,8 +280,10 @@ export function RefinedProfileForm({ userId }: RefinedProfileFormProps) {
   }
 
   const addedPlatforms = ALL_PLATFORMS.filter(
-    (platform) => formData.social_links[platform as keyof typeof formData.social_links],
-  )
+  (platform) => platform in formData.social_links
+)
+
+
   const availablePlatforms = ALL_PLATFORMS.filter(
     (platform) => !formData.social_links[platform as keyof typeof formData.social_links],
   )
@@ -314,7 +316,6 @@ export function RefinedProfileForm({ userId }: RefinedProfileFormProps) {
         contact_email: formData.contact_email,
         phone_number: formData.phone_number,
         profile_picture_url: formData.profile_picture_url,
-        profile_view_type: formData.profile_view_type,
         accent_color: formData.accent_color,
         background_theme: formData.background_theme,
         work_experience: formData.work_experience,
@@ -343,9 +344,9 @@ export function RefinedProfileForm({ userId }: RefinedProfileFormProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 lg:grid-cols-2 divide-x divide-gray-300">
       {/* Left Pane: Form */}
-      <form onSubmit={handleSubmit} className="space-y-6 overflow-y-auto max-h-[calc(100vh-200px)]">
+      <form onSubmit={handleSubmit} className="px-4 overflow-y-auto max-h-[calc(100vh-250px)] overflow-y-auto scrollbar-hide">
         {/* Full Name */}
         <div>
           <label className="block mb-2 text-sm font-medium">Full Name</label>
@@ -534,54 +535,6 @@ export function RefinedProfileForm({ userId }: RefinedProfileFormProps) {
           />
         </div>
 
-        {/* View Type Selector */}
-        <ViewSelector
-          selectedView={formData.profile_view_type}
-          onViewChange={(view) => setFormData((prev) => ({ ...prev, profile_view_type: view }))}
-        />
-
-        {/* Accent Color */}
-        <div>
-          <label className="block mb-2 text-sm font-medium">Accent Color</label>
-          <div className="grid grid-cols-6 gap-2">
-            {["bg-blue-500", "bg-purple-500", "bg-pink-500", "bg-green-500", "bg-orange-500", "bg-red-500"].map(
-              (color) => (
-                <button
-                  key={color}
-                  type="button"
-                  onClick={() => setFormData((prev) => ({ ...prev, accent_color: color }))}
-                  className={`w-full h-10 rounded-lg border-2 transition-all duration-300 ${
-                    formData.accent_color === color
-                      ? "border-gray-900 dark:border-white"
-                      : "border-gray-300 dark:border-gray-600"
-                  } ${color}`}
-                />
-              ),
-            )}
-          </div>
-        </div>
-
-        {/* Background Theme */}
-        <div>
-          <label className="block mb-2 text-sm font-medium">Background Theme</label>
-          <div className="grid grid-cols-2 gap-3">
-            {["light", "dark"].map((theme) => (
-              <button
-                key={theme}
-                type="button"
-                onClick={() => setFormData((prev) => ({ ...prev, background_theme: theme as "light" | "dark" }))}
-                className={`p-3 rounded-lg border-2 transition-all duration-300 capitalize font-medium ${
-                  formData.background_theme === theme
-                    ? "border-blue-600 bg-blue-50 dark:bg-blue-900/20"
-                    : "border-gray-300 dark:border-gray-600"
-                }`}
-              >
-                {theme}
-              </button>
-            ))}
-          </div>
-        </div>
-
         {/* Services Section */}
         <div className="space-y-4 pt-4 border-t border-gray-300 dark:border-gray-700">
           <div>
@@ -684,43 +637,6 @@ export function RefinedProfileForm({ userId }: RefinedProfileFormProps) {
           >
             + Add Project
           </button>
-        </div>
-
-        {/* Layout Type Selector */}
-        <div>
-          <label className="block mb-2 text-sm font-medium">Portfolio Layout</label>
-          <div className="grid grid-cols-3 gap-3">
-            {[
-              { value: 1, label: "Classic" },
-              { value: 2, label: "Split View" },
-              { value: 3, label: "Creative" },
-            ].map((layout) => (
-              <button
-                key={layout.value}
-                type="button"
-                onClick={() => setFormData((prev) => ({ ...prev, layout_type: layout.value }))}
-                className={`p-3 rounded-lg border-2 transition-all duration-300 font-medium ${
-                  formData.layout_type === layout.value
-                    ? "border-blue-600 bg-blue-50 dark:bg-blue-900/20"
-                    : "border-gray-300 dark:border-gray-600"
-                }`}
-              >
-                {layout.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Cover Image field */}
-        <div>
-          <label className="block mb-2 text-sm font-medium">Cover Image URL</label>
-          <input
-            type="url"
-            value={formData.cover_image}
-            onChange={(e) => setFormData((prev) => ({ ...prev, cover_image: e.target.value }))}
-            className="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg p-3 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-            placeholder="https://example.com/cover.jpg"
-          />
         </div>
 
         {/* Work Experience Section */}
@@ -847,7 +763,7 @@ export function RefinedProfileForm({ userId }: RefinedProfileFormProps) {
         <div className="space-y-4 pt-4 border-t border-gray-300 dark:border-gray-700">
           <div>
             <h3 className="font-medium mb-1">Social Media Links</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Optional - Add your social profiles</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Add your social profiles</p>
           </div>
 
           {addedPlatforms.length > 0 && (
@@ -902,6 +818,12 @@ export function RefinedProfileForm({ userId }: RefinedProfileFormProps) {
           )}
         </div>
 
+         {/* View Type Selector */}
+        <ViewSelector
+          selectedView={formData.layout_type}
+          onViewChange={(view) => setFormData((prev) => ({ ...prev, layout_type: view }))}
+        />
+
         {/* Message */}
         {message && (
           <div
@@ -919,31 +841,18 @@ export function RefinedProfileForm({ userId }: RefinedProfileFormProps) {
         <button
           type="submit"
           disabled={saving}
-          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300"
+          className="w-full mt-4 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300"
         >
           {saving ? "Saving..." : "Save Changes"}
         </button>
       </form>
 
       {/* Right Pane: Live Preview */}
-      <div className="sticky top-8 h-fit">
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Live Preview</h3>
+      <div className="px-4 max-h-[calc(100vh-250px)] overflow-y-auto border-gray-300 scrollbar-hide">
           <ProfilePreview
-            fullName={formData.full_name}
-            position={formData.position}
-            companyName={formData.company_name}
-            companyWebsite={formData.company_website}
-            bio={formData.bio}
-            contactEmail={formData.contact_email}
-            phoneNumber={formData.phone_number}
-            profilePictureUrl={formData.profile_picture_url}
-            socialLinks={formData.social_links}
-            profileViewType={formData.profile_view_type}
-            accentColor={formData.accent_color}
-            backgroundTheme={formData.background_theme}
+            profile={formData}
+            profileViewType={formData.layout_type}
           />
-        </div>
       </div>
     </div>
   )

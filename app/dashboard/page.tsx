@@ -1,5 +1,7 @@
 "use client"
-
+import React, { useRef } from "react"
+import * as htmlToImage from "html-to-image"
+import QRCode from "react-qr-code";
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
@@ -11,6 +13,23 @@ export default function Dashboard() {
   const [user, setUser] = useState<any>(null)
   const [profile, setProfile] = useState<any>(null)
   const [loading, setLoading] = useState(true)
+
+   const qrRef = useRef<HTMLDivElement>(null)
+
+  const handleDownload = async () => {
+    if (!qrRef.current) return
+
+    try {
+      const dataUrl = await htmlToImage.toJpeg(qrRef.current, { quality: 0.95 })
+      const link = document.createElement("a")
+      link.download = `${profile?.username || "qrcode"}.jpeg`
+      link.href = dataUrl
+      link.click()
+    } catch (error) {
+      console.error("Failed to download image:", error)
+    }
+  }
+
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -81,8 +100,9 @@ export default function Dashboard() {
               </div>
             )}
 
-            <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-8 space-y-4">
-              <div>
+            <div className="flex justify-between bg-gray-50 dark:bg-gray-900 rounded-xl p-8 space-y-4">
+              <div className="space-y-4">
+                <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Email</p>
                 <p className="text-lg font-medium">{user?.email}</p>
               </div>
@@ -102,15 +122,42 @@ export default function Dashboard() {
                   <p className="text-lg font-medium">{new Date(profile.updated_at).toLocaleDateString()}</p>
                 </div>
               )}
-            </div>
+              </div>
+              
+              <div className="flex flex-col items-center space-y-4">
+                  <div
+                    ref={qrRef}
+                    className="bg-white p-4 flex items-center justify-center"
+                    style={{
+                      width: "200px",
+                      height: "auto",
+                      margin: "0 auto",
+                    }}
+                  >
+                    <QRCode
+                      size={150}
+                      value={`https://mylinks-iota.vercel.app/u/${profile?.username}`}
+                      bgColor="#ffffff"
+                      fgColor="#000000"
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </div>
 
+                  <button
+                    onClick={handleDownload}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg mt-4 shadow hover:bg-blue-700 transition"
+                  >
+                    Download as JPEG
+                  </button>
+              </div>
+            </div>
             <button
               onClick={handleLogout}
               className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300"
             >
               Sign Out
             </button>
-          </div>
+          </div>          
         </div>
       </main>
     </>

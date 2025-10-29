@@ -4,9 +4,6 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { createBrowserSupabaseClient } from "@/lib/supabase-browser"
 import { Navbar } from "@/components/navbar"
-import { DisplayCard } from "@/components/display-card"
-import { DisplayMinimal } from "@/components/display-minimal"
-import { DisplayDetailed } from "@/components/display-detailed"
 
 const ACCENT_COLORS = [
   { name: "Blue", value: "bg-blue-500" },
@@ -242,33 +239,6 @@ export default function CustomizePage() {
                     : "bg-white border border-gray-300"
                 }`}
               >
-                {customization.display_type === "card" && (
-                  <DisplayCard
-                    fullName={profile.full_name || "Your Name"}
-                    bio={profile.bio || "Your bio goes here"}
-                    avatarUrl={profile.avatar_url}
-                    socialLinks={profile.social_links || {}}
-                    accentColor={customization.accent_color}
-                  />
-                )}
-                {customization.display_type === "minimal" && (
-                  <DisplayMinimal
-                    fullName={profile.full_name || "Your Name"}
-                    bio={profile.bio || "Your bio goes here"}
-                    avatarUrl={profile.avatar_url}
-                    socialLinks={profile.social_links || {}}
-                    accentColor={customization.accent_color}
-                  />
-                )}
-                {customization.display_type === "detailed" && (
-                  <DisplayDetailed
-                    fullName={profile.full_name || "Your Name"}
-                    bio={profile.bio || "Your bio goes here"}
-                    avatarUrl={profile.avatar_url}
-                    socialLinks={profile.social_links || {}}
-                    accentColor={customization.accent_color}
-                  />
-                )}
               </div>
             </div>
           </div>

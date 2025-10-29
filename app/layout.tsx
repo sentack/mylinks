@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} transition-colors duration-300`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} transition-colors duration-300 bg-white dark:bg-black`}>
         <script
           dangerouslySetInnerHTML={{
             __html: `

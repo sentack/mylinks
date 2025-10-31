@@ -96,7 +96,7 @@ export default function Dashboard() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 },
+      transition: { duration: 0.8, transition: { duration: 0.5, ease: ("easeOut" as unknown) as any }},
     },
   }
 

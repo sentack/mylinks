@@ -1,9 +1,12 @@
 "use client"
 
 import type React from "react"
-
-import { useEffect, useState } from "react"
+import { useRef, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+
+import { useReactToPrint } from "react-to-print"
+import * as htmlToImage from "html-to-image"
+
 import { createBrowserSupabaseClient } from "@/lib/supabase-browser"
 import { Navbar } from "@/components/navbar"
 import Card1 from "@/components/cards/card1"
@@ -38,6 +41,9 @@ const cards = {
 }
 
 export default function CustomizePage() {
+  const contentRef = useRef(null);
+  const reactToPrintFn = useReactToPrint({ contentRef });
+
   const router = useRouter()
   const [user, setUser] = useState<any>(null)
   const [loading, setLoading] = useState(true)
@@ -132,6 +138,21 @@ export default function CustomizePage() {
       setTimeout(() => setMessage(null), 3000)
     }
   }
+
+  const handleDownload = async () => {
+      if (!contentRef.current) return
+  
+      try {
+        const dataUrl = await htmlToImage.toPng(contentRef.current, { quality: 1 })
+        const link = document.createElement("a")
+        link.download = `${profile?.username + "-business-card" || "card"}.png`
+        link.href = dataUrl
+        link.click()
+      } catch (error) {
+        console.error("Failed to download image:", error)
+      }
+    }
+
 
   if (loading) {
     return (
@@ -312,6 +333,7 @@ export default function CustomizePage() {
             <div className="space-y-4">
               <h2 className="text-lg font-semibold">Live Preview</h2>
               <div
+                ref={contentRef}
                 className={`p-8 rounded-lg transition-all duration-300 ${
                   customization.background_theme === "dark"
                     ? "bg-black border border-gray-700"
@@ -324,6 +346,13 @@ export default function CustomizePage() {
                   backgroundTheme={customization.background_theme}
                 />
               </div>
+
+              <button onClick={reactToPrintFn} className="px-3 py-2.5 bg-blue-900 shadow-lg hover:shadow-2xl rounded-lg mx-4 text-white font-semibold hover:bg-blue-800">
+                Download as PDF
+              </button>
+              <button onClick={handleDownload} className="px-3 py-2.5 bg-green-900 shadow-lg hover:shadow-2xl rounded-lg mx-4 text-white font-semibold hover:bg-green-800">
+                Download as Image
+              </button>
             </div>
           </div>
         </div>

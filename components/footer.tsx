@@ -1,4 +1,4 @@
-import { LinkIcon, Mail, Github, Twitter, Linkedin } from "lucide-react"
+import { LinkIcon, Mail, Github, Twitter, Linkedin, Coffee, Heart } from "lucide-react"
 import Link from "next/link"
 
 export function Footer() {
@@ -30,19 +30,19 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/#features" className="text-gray-400 hover:text-white transition-colors">
                   Features
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/about#pricing" className="text-gray-400 hover:text-white transition-colors">
                   Pricing
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/about#faq" className="text-gray-400 hover:text-white transition-colors">
                   FAQ
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -52,23 +52,23 @@ export function Footer() {
             <h4 className="font-semibold mb-4 text-white">Company</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/about#privacy" className="text-gray-400 hover:text-white transition-colors">
                   Privacy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/about#terms" className="text-gray-400 hover:text-white transition-colors">
                   Terms
+                </Link>
+              </li>
+              <li>
+                <a href="mailto:support@mylinks.com" className="text-gray-400 hover:text-white transition-colors">
+                  Support
                 </a>
               </li>
             </ul>
@@ -115,17 +115,33 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400 text-sm">© {currentYear} MyLinks. All rights reserved.</p>
+          {/* Copyright and Made with love */}
+          <div className="flex flex-col sm:flex-row items-center gap-2 text-sm text-gray-400">
+            <p>© {currentYear} MyLinks. All rights reserved.</p>
+            <span className="hidden sm:inline">•</span>
+            <span className="flex items-center gap-1">
+              Made with
+              <Coffee className="w-4 h-4 text-amber-600" />
+              <span className="text-red-500">&</span>
+              <Heart className="w-4 h-4 text-red-500" />
+              by
+              <a
+                href="https://sentack-portfolio.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-white hover:text-blue-400 transition-colors"
+              >
+                SENTACK
+              </a>
+            </span>
+          </div>
           <div className="flex gap-6 text-sm text-gray-400">
-            <a href="#" className="hover:text-white transition-colors">
+            <Link href="/about#privacy" className="hover:text-white transition-colors">
               Privacy Policy
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
+            </Link>
+            <Link href="/about#terms" className="hover:text-white transition-colors">
               Terms of Service
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Cookie Policy
-            </a>
+            </Link>
           </div>
         </div>
       </div>

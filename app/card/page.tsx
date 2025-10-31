@@ -14,6 +14,9 @@ import Card2 from "@/components/cards/card2"
 import Card3 from "@/components/cards/card3"
 import Card4 from "@/components/cards/card4"
 import Card5 from "@/components/cards/card5"
+import { motion } from "framer-motion"
+import { Download, FileText, ArrowLeft } from "lucide-react"
+import Link from "next/link"
 
 const ACCENT_COLORS = [
   { name: "Blue", value: "bg-blue-500" },
@@ -41,8 +44,8 @@ const cards = {
 }
 
 export default function CustomizePage() {
-  const contentRef = useRef(null);
-  const reactToPrintFn = useReactToPrint({ contentRef });
+  const contentRef = useRef(null)
+  const reactToPrintFn = useReactToPrint({ contentRef })
 
   const router = useRouter()
   const [user, setUser] = useState<any>(null)
@@ -140,26 +143,29 @@ export default function CustomizePage() {
   }
 
   const handleDownload = async () => {
-      if (!contentRef.current) return
-  
-      try {
-        const dataUrl = await htmlToImage.toPng(contentRef.current, { quality: 1 })
-        const link = document.createElement("a")
-        link.download = `${profile?.username + "-business-card" || "card"}.png`
-        link.href = dataUrl
-        link.click()
-      } catch (error) {
-        console.error("Failed to download image:", error)
-      }
-    }
+    if (!contentRef.current) return
 
+    try {
+      const dataUrl = await htmlToImage.toPng(contentRef.current, { quality: 1 })
+      const link = document.createElement("a")
+      link.download = `${profile?.username + "-business-card" || "card"}.png`
+      link.href = dataUrl
+      link.click()
+    } catch (error) {
+      console.error("Failed to download image:", error)
+    }
+  }
 
   if (loading) {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-300 flex items-center justify-center">
-          <p>Loading...</p>
+        <main className="min-h-screen bg-gradient-to-br from-white to-gray-50 dark:from-black dark:to-gray-950 text-black dark:text-white transition-colors duration-300 flex items-center justify-center">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+            className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full"
+          />
         </main>
       </>
     )
@@ -169,8 +175,13 @@ export default function CustomizePage() {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-300 flex items-center justify-center">
-          <p>Profile not found</p>
+        <main className="min-h-screen bg-gradient-to-br from-white to-gray-50 dark:from-black dark:to-gray-950 text-black dark:text-white transition-colors duration-300 flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-xl font-semibold mb-4">Profile not found</p>
+            <Link href="/profile" className="text-blue-600 dark:text-blue-400 hover:text-blue-700">
+              Go to profile
+            </Link>
+          </div>
         </main>
       </>
     )
@@ -179,25 +190,64 @@ export default function CustomizePage() {
   const SelectedCard = cards[customization.display_type as keyof typeof cards] || Card1
   const profileWithLogo = { ...profile, logo_url: logoPreview || profile.logo_url }
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+  }
+
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+      <main className="min-h-screen bg-gradient-to-br from-white to-gray-50 dark:from-black dark:to-gray-950 text-black dark:text-white transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Customization Controls */}
-            <div className="space-y-8">
-              <div className="space-y-2">
-                <h1 className="text-4xl font-bold">Customize Your Business Card</h1>
-                <p className="text-gray-600 dark:text-gray-400">
-                  Personalize how your business card looks to the world
-                </p>
-              </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-8"
+          >
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors mb-6"
+            >
+              <ArrowLeft size={18} />
+              Back to Dashboard
+            </Link>
+            <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+              Design Your Business Card
+            </h1>
+            <p className="text-gray-600 dark:text-gray-400 text-lg mt-2">
+              Customize your appearance and see live preview
+            </p>
+          </motion.div>
 
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-12"
+          >
+            {/* Customization Controls */}
+            <motion.div variants={itemVariants} className="space-y-6">
               {/* Logo Upload */}
               <div className="space-y-4">
-                <h2 className="text-lg font-semibold">Company Logo</h2>
-                <div className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg p-6 text-center">
+                <h2 className="text-xl font-bold">Company Logo</h2>
+                <div className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl p-6 text-center hover:border-blue-400 dark:hover:border-blue-600 transition-colors">
                   <input
                     type="file"
                     accept="image/png"
@@ -232,36 +282,38 @@ export default function CustomizePage() {
 
               {/* Display Type Selection */}
               <div className="space-y-4">
-                <h2 className="text-lg font-semibold">Card Design</h2>
-                <div className="space-y-2">
+                <h2 className="text-xl font-bold">Card Design</h2>
+                <div className="grid grid-cols-2 gap-3">
                   {DISPLAY_TYPES.map((type) => (
-                    <label key={type.value} className="flex items-center gap-3 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="display_type"
-                        value={type.value}
-                        checked={customization.display_type === type.value}
-                        onChange={(e) =>
-                          setCustomization((prev) => ({
-                            ...prev,
-                            display_type: e.target.value,
-                          }))
-                        }
-                        className="w-4 h-4"
-                      />
-                      <span className="text-sm font-medium">{type.name}</span>
-                    </label>
+                    <motion.button
+                      key={type.value}
+                      whileHover={{ y: -2 }}
+                      onClick={() =>
+                        setCustomization((prev) => ({
+                          ...prev,
+                          display_type: type.value,
+                        }))
+                      }
+                      className={`p-4 rounded-lg border-2 transition-all font-medium ${
+                        customization.display_type === type.value
+                          ? "border-blue-600 bg-blue-50 dark:bg-blue-900/20"
+                          : "border-gray-300 dark:border-gray-700 hover:border-gray-400"
+                      }`}
+                    >
+                      {type.name}
+                    </motion.button>
                   ))}
                 </div>
               </div>
 
               {/* Accent Color Selection */}
               <div className="space-y-4">
-                <h2 className="text-lg font-semibold">Accent Color</h2>
+                <h2 className="text-xl font-bold">Accent Color</h2>
                 <div className="grid grid-cols-3 gap-3">
                   {ACCENT_COLORS.map((color) => (
-                    <button
+                    <motion.button
                       key={color.value}
+                      whileHover={{ scale: 1.05 }}
                       onClick={() =>
                         setCustomization((prev) => ({
                           ...prev,
@@ -270,24 +322,25 @@ export default function CustomizePage() {
                       }
                       className={`p-4 rounded-lg border-2 transition-all ${
                         customization.accent_color === color.value
-                          ? "border-gray-800 dark:border-gray-200"
+                          ? "border-gray-800 dark:border-gray-200 ring-2 ring-offset-2 ring-offset-white dark:ring-offset-black"
                           : "border-gray-300 dark:border-gray-700"
                       }`}
                     >
                       <div className={`w-full h-8 rounded ${color.value}`} />
                       <p className="text-xs mt-2 text-center font-medium">{color.name}</p>
-                    </button>
+                    </motion.button>
                   ))}
                 </div>
               </div>
 
               {/* Background Theme Selection */}
               <div className="space-y-4">
-                <h2 className="text-lg font-semibold">Background Theme</h2>
+                <h2 className="text-xl font-bold">Background Theme</h2>
                 <div className="flex gap-4">
                   {["light", "dark"].map((theme) => (
-                    <button
+                    <motion.button
                       key={theme}
+                      whileHover={{ scale: 1.02 }}
                       onClick={() =>
                         setCustomization((prev) => ({
                           ...prev,
@@ -296,45 +349,49 @@ export default function CustomizePage() {
                       }
                       className={`flex-1 p-4 rounded-lg border-2 transition-all capitalize font-medium ${
                         customization.background_theme === theme
-                          ? "border-gray-800 dark:border-gray-200 bg-gray-100 dark:bg-gray-800"
-                          : "border-gray-300 dark:border-gray-700"
+                          ? "border-blue-600 bg-blue-50 dark:bg-blue-900/20"
+                          : "border-gray-300 dark:border-gray-700 hover:border-gray-400"
                       }`}
                     >
-                      {theme}
-                    </button>
+                      {theme === "light" ? "☀️" : "🌙"} {theme}
+                    </motion.button>
                   ))}
                 </div>
               </div>
 
               {/* Message */}
               {message && (
-                <div
-                  className={`p-4 rounded-lg ${
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`p-4 rounded-lg border ${
                     message.type === "success"
-                      ? "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200"
-                      : "bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200"
+                      ? "bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700 text-green-800 dark:text-green-200"
+                      : "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-700 text-red-800 dark:text-red-200"
                   }`}
                 >
                   {message.text}
-                </div>
+                </motion.div>
               )}
 
               {/* Save Button */}
-              <button
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={handleSave}
                 disabled={saving}
-                className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300"
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:from-gray-400 disabled:to-gray-500 text-white px-6 py-3 rounded-lg font-bold transition-all duration-300"
               >
                 {saving ? "Saving..." : "Save Customization"}
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
 
             {/* Live Preview */}
-            <div className="space-y-4">
-              <h2 className="text-lg font-semibold">Live Preview</h2>
+            <motion.div variants={itemVariants} className="space-y-4">
+              <h2 className="text-xl font-bold">Live Preview</h2>
               <div
                 ref={contentRef}
-                className={`p-8 rounded-lg transition-all duration-300 ${
+                className={`p-8 rounded-xl transition-all duration-300 shadow-xl ${
                   customization.background_theme === "dark"
                     ? "bg-black border border-gray-700"
                     : "bg-white border border-gray-300"
@@ -347,14 +404,29 @@ export default function CustomizePage() {
                 />
               </div>
 
-              <button onClick={reactToPrintFn} className="px-3 py-2.5 bg-blue-900 shadow-lg hover:shadow-2xl rounded-lg mx-4 text-white font-semibold hover:bg-blue-800">
-                Download as PDF
-              </button>
-              <button onClick={handleDownload} className="px-3 py-2.5 bg-green-900 shadow-lg hover:shadow-2xl rounded-lg mx-4 text-white font-semibold hover:bg-green-800">
-                Download as Image
-              </button>
-            </div>
-          </div>
+              {/* Download Buttons */}
+              <div className="flex gap-3">
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={reactToPrintFn}
+                  className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl rounded-lg text-white font-semibold transition-all flex items-center justify-center gap-2"
+                >
+                  <FileText size={18} />
+                  PDF
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleDownload}
+                  className="flex-1 px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 shadow-lg hover:shadow-xl rounded-lg text-white font-semibold transition-all flex items-center justify-center gap-2"
+                >
+                  <Download size={18} />
+                  Image
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
       </main>
     </>

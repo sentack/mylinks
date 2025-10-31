@@ -127,14 +127,7 @@ export function PortfolioLayout2({ profile }: PortfolioLayout2Props) {
           phone={profile.phone_number}
           socialLinks={profile.social_links || {}}
         />
-      </div>
-
-      {/* Footer */}
-      <footer className="border-t border-gray-200 dark:border-gray-800 py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center text-gray-600 dark:text-gray-400 text-sm">
-          <p>© {new Date().getFullYear()} MyLinks. All rights reserved.</p>
-        </div>
-      </footer>
+      </div>      
     </div>
   )
 }

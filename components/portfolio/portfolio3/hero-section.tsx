@@ -9,53 +9,51 @@ interface HeroSectionProps {
 
 export function HeroSection({ fullName, position, bio, profilePictureUrl, accentColor, coverImage }: HeroSectionProps) {
   return (
-    <section className="relative pt-12 sm:pt-20 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 dark:from-indigo-950 dark:via-purple-950 dark:to-pink-950">
-      {/* Cover Background */}
-      {coverImage && (
-        <div
-          className="absolute inset-0 h-48 sm:h-64 bg-cover bg-center"
-          style={{ backgroundImage: `url(${coverImage})` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-indigo-100 dark:to-indigo-950" />
-        </div>
-      )}
+    <section className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950">
+      <div className="absolute inset-0 overflow-hidden opacity-50">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-green-400 dark:bg-green-600 rounded-full blur-3xl opacity-20" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-teal-400 dark:bg-teal-600 rounded-full blur-3xl opacity-20" />
+      </div>
 
       <div className="relative max-w-4xl mx-auto">
-        <div className="flex flex-col items-center text-center space-y-4 sm:space-y-6">
-          {/* Profile Picture */}
-          <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden border-4 border-indigo-500 dark:border-indigo-400 shadow-xl shadow-indigo-500/50 dark:shadow-indigo-400/50">
-            {profilePictureUrl ? (
-              <img
-                src={profilePictureUrl || "/placeholder.svg"}
-                alt={fullName}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="w-full h-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center">
-                <span className="text-white text-2xl sm:text-3xl font-bold">{fullName?.charAt(0) || "?"}</span>
-              </div>
-            )}
+        <div className="flex flex-col items-center text-center space-y-6 sm:space-y-8">
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-teal-400 rounded-full blur-xl opacity-30" />
+            <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-green-500 dark:border-green-400 shadow-2xl">
+              {profilePictureUrl ? (
+                <img
+                  src={profilePictureUrl || "/placeholder.svg"}
+                  alt={fullName}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center">
+                  <span className="text-white text-3xl sm:text-4xl font-bold">{fullName?.charAt(0) || "?"}</span>
+                </div>
+              )}
+            </div>
           </div>
 
-          {/* Name and Title */}
-          <div className="space-y-2">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+          <div className="space-y-3">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white">
               {fullName || "Your Name"}
             </h1>
             {position && (
-              <p className="text-lg sm:text-xl text-indigo-700 dark:text-indigo-300 font-semibold">{position}</p>
+              <p className="text-xl sm:text-2xl text-green-600 dark:text-green-400 font-semibold">{position}</p>
             )}
           </div>
 
-          {/* Bio */}
           {bio && (
-            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 max-w-2xl leading-relaxed px-4">
+            <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed">
               {bio}
             </p>
           )}
 
-          {/* Accent Line */}
-          <div className="w-16 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full" />
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-px bg-gradient-to-r from-transparent to-green-500" />
+            <div className="w-2 h-2 bg-green-500 rounded-full" />
+            <div className="w-12 h-px bg-gradient-to-l from-transparent to-green-500" />
+          </div>
         </div>
       </div>
     </section>

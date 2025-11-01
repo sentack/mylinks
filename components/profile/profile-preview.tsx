@@ -44,10 +44,10 @@ export function ProfilePreview({
 
 
    return (
-    <div
-      className={`relative w-full`}
-    >
-      {renderPortfolio()}
+    <div className="relative w-full h-full overflow-hidden bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
+      <div className="w-full h-full overflow-y-auto">
+        {renderPortfolio()}
+      </div>
     </div>
   )
 }

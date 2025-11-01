@@ -36,9 +36,9 @@ export function ContactSection({ email, phone, socialLinks }: ContactSectionProp
   }
 
   return (
-    <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-950/30 dark:via-purple-950/30 dark:to-pink-950/30">
+    <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-green-50 via-teal-50 to-emerald-50 dark:from-green-950/30 dark:via-teal-950/30 dark:to-emerald-950/30">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-8 sm:mb-12">
+        <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-green-600 via-teal-600 to-emerald-600 dark:from-green-400 dark:via-teal-400 dark:to-emerald-400 bg-clip-text text-transparent mb-8 sm:mb-12">
           Get In Touch
         </h2>
 
@@ -46,13 +46,13 @@ export function ContactSection({ email, phone, socialLinks }: ContactSectionProp
           {/* Contact Info */}
           <div className="space-y-6">
             {email && (
-              <div className="p-4 sm:p-6 rounded-xl bg-white dark:bg-gray-900 border-2 border-indigo-200 dark:border-indigo-800 hover:shadow-lg transition-shadow">
-                <h3 className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wide mb-2">
+              <div className="p-4 sm:p-6 rounded-xl bg-white dark:bg-gray-900 border-2 border-green-200 dark:border-green-800 hover:shadow-lg transition-shadow">
+                <h3 className="text-sm font-semibold text-green-600 dark:text-green-400 uppercase tracking-wide mb-2">
                   Email
                 </h3>
                 <a
                   href={`mailto:${email}`}
-                  className="text-base sm:text-lg text-indigo-600 dark:text-indigo-400 hover:underline break-all"
+                  className="text-base sm:text-lg text-green-600 dark:text-green-400 hover:underline break-all"
                 >
                   {email}
                 </a>
@@ -60,13 +60,13 @@ export function ContactSection({ email, phone, socialLinks }: ContactSectionProp
             )}
 
             {phone && (
-              <div className="p-4 sm:p-6 rounded-xl bg-white dark:bg-gray-900 border-2 border-purple-200 dark:border-purple-800 hover:shadow-lg transition-shadow">
-                <h3 className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wide mb-2">
+              <div className="p-4 sm:p-6 rounded-xl bg-white dark:bg-gray-900 border-2 border-teal-200 dark:border-teal-800 hover:shadow-lg transition-shadow">
+                <h3 className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wide mb-2">
                   Phone
                 </h3>
                 <a
                   href={`tel:${phone}`}
-                  className="text-base sm:text-lg text-purple-600 dark:text-purple-400 hover:underline"
+                  className="text-base sm:text-lg text-teal-600 dark:text-teal-400 hover:underline"
                 >
                   {phone}
                 </a>
@@ -76,8 +76,8 @@ export function ContactSection({ email, phone, socialLinks }: ContactSectionProp
 
           {/* Social Links */}
           {socialLinks && Object.keys(socialLinks).length > 0 && (
-            <div className="p-4 sm:p-6 rounded-xl bg-white dark:bg-gray-900 border-2 border-pink-200 dark:border-pink-800 hover:shadow-lg transition-shadow">
-              <h3 className="text-sm font-semibold text-pink-600 dark:text-pink-400 uppercase tracking-wide mb-4">
+            <div className="p-4 sm:p-6 rounded-xl bg-white dark:bg-gray-900 border-2 border-emerald-200 dark:border-emerald-800 hover:shadow-lg transition-shadow">
+              <h3 className="text-sm font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wide mb-4">
                 Follow
               </h3>
               <div className="flex flex-wrap gap-3 sm:gap-4">
@@ -89,7 +89,7 @@ export function ContactSection({ email, phone, socialLinks }: ContactSectionProp
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-3 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 transition-all hover:scale-110 shadow-md"
+                        className="p-3 rounded-lg bg-gradient-to-br from-green-500 to-teal-500 text-white hover:from-green-600 hover:to-teal-600 transition-all hover:scale-110 shadow-md"
                       >
                         {SocialIcons[platform] || null}
                       </a>

@@ -11,9 +11,9 @@ export function ServicesSection({ services }: ServicesSectionProps) {
   if (!services || services.length === 0) return null
 
   return (
-    <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30">
+    <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-green-50 to-teal-50 dark:from-green-950/30 dark:to-teal-950/30">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-8 sm:mb-12">
+        <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-green-600 to-teal-600 dark:from-green-400 dark:to-teal-400 bg-clip-text text-transparent mb-8 sm:mb-12">
           Services
         </h2>
 
@@ -21,9 +21,9 @@ export function ServicesSection({ services }: ServicesSectionProps) {
           {services.map((service, idx) => (
             <div
               key={idx}
-              className="group p-6 border-2 border-purple-200 dark:border-purple-800 rounded-xl bg-white dark:bg-gray-900 hover:shadow-xl hover:shadow-purple-500/20 dark:hover:shadow-purple-400/20 transition-all duration-300 hover:-translate-y-1"
+              className="group p-6 border-2 border-green-200 dark:border-green-800 rounded-xl bg-white dark:bg-gray-900 hover:shadow-xl hover:shadow-green-500/20 dark:hover:shadow-green-400/20 transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <span className="text-white text-xl font-bold">{idx + 1}</span>
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-black dark:text-white mb-2">{service.title}</h3>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { HeroSection } from "./portfolio3/hero-section"
 import { AboutSection } from "./portfolio3/about-section"
 import { ServicesSection } from "./portfolio3/services-section"
@@ -12,10 +12,11 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { Menu, X, User, Briefcase, GraduationCap, FolderOpen, Mail, Wrench } from "lucide-react"
 
 interface PortfolioLayout3Props {
+  isPreview?: boolean;
   profile: any
 }
 
-export function PortfolioLayout3({ profile }: PortfolioLayout3Props) {
+export function PortfolioLayout3({isPreview = false, profile }: PortfolioLayout3Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const scrollToSection = (id: string) => {
@@ -26,8 +27,39 @@ export function PortfolioLayout3({ profile }: PortfolioLayout3Props) {
     }
   }
 
+  useEffect(() => {
+    // This function is here only for the preview section of this portfolio inside profile update, It works fine when not in previwe mode
+  // This is just a simple bypass I used to make the preview better on the mobile screens
+    if (!isPreview) return; // Only run this logic in preview mode
+
+  const container = document.getElementById("preview-container");
+  if (!container) return; // prevent null errors
+
+  if (sidebarOpen) {
+    // Scroll smoothly to the preview container
+    container.scrollIntoView({ behavior: "smooth", block: "start",  });
+
+    setTimeout(() => {
+      window.scrollBy({ top: -50, behavior: "smooth" });
+    }, 300);
+
+    // Disable scrolling
+    container.style.overflow = "hidden";
+  } else {
+    // Restore scrolling
+    container.style.overflow = "";
+    document.body.style.overflow = "";
+  }
+
+  return () => {
+    container.style.overflow = "";
+    document.body.style.overflow = "";
+  };
+}, [sidebarOpen, isPreview]);
+
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-black dark:to-indigo-950 text-black dark:text-white transition-colors duration-300">
+    <div  id="preview-container" className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-black dark:to-indigo-950 text-black dark:text-white transition-colors duration-300">
       {/* Desktop Sidebar */}
       <aside className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-50 lg:block lg:w-64 lg:overflow-y-auto lg:bg-white/80 lg:dark:bg-gray-900/80 lg:backdrop-blur-md lg:border-r lg:border-gray-200 lg:dark:border-gray-800">
         <div className="flex h-full flex-col gap-y-5 px-6 py-8">
@@ -106,24 +138,11 @@ export function PortfolioLayout3({ profile }: PortfolioLayout3Props) {
         </div>
       </aside>
 
-      {/* Mobile Header */}
-      <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md px-4 py-4 shadow-sm sm:px-6 lg:hidden border-b border-gray-200 dark:border-gray-800">
-        <button
-          type="button"
-          className="-m-2.5 p-2.5 text-gray-700 dark:text-gray-300 lg:hidden"
-          onClick={() => setSidebarOpen(true)}
-        >
-          <Menu className="h-6 w-6" />
-        </button>
-        <div className="flex-1 text-sm font-semibold leading-6 text-gray-900 dark:text-white">Portfolio</div>
-        <ThemeToggle />
-      </div>
-
       {/* Mobile Sidebar */}
       {sidebarOpen && (
         <div className="relative z-50 lg:hidden">
-          <div className="fixed inset-0 bg-gray-900/80" onClick={() => setSidebarOpen(false)} />
-          <div className="fixed inset-0 flex">
+          <div className={`${!isPreview ? "fixed inset-0" : "absolute top-0 w-full h-screen"} bg-gray-900/80 `} onClick={() => setSidebarOpen(false)} />
+          <div className={`${!isPreview ? "fixed inset-0" : "absolute h-screen w-full top-0 left-0"} flex`}>
             <div className="relative mr-16 flex w-full max-w-xs flex-1">
               <div className="absolute left-full top-0 flex w-16 justify-center pt-5">
                 <button type="button" className="-m-2.5 p-2.5" onClick={() => setSidebarOpen(false)}>
@@ -207,6 +226,19 @@ export function PortfolioLayout3({ profile }: PortfolioLayout3Props) {
           </div>
         </div>
       )}
+
+      {/* Mobile Header */}
+      <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md px-4 py-4 shadow-sm sm:px-6 lg:hidden border-b border-gray-200 dark:border-gray-800">
+        <button
+          type="button"
+          className="-m-2.5 p-2.5 text-gray-700 dark:text-gray-300 lg:hidden"
+          onClick={() => setSidebarOpen(true)}
+        >
+          <Menu className="h-6 w-6" />
+        </button>
+        <div className="flex-1 text-sm font-semibold leading-6 text-gray-900 dark:text-white">Portfolio</div>
+        <ThemeToggle />
+      </div>    
 
       <main className="lg:pl-64">
         {/* Hero Section */}

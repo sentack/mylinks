@@ -346,7 +346,7 @@ export function RefinedProfileForm({ userId }: RefinedProfileFormProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 divide-x divide-gray-300">
       {/* Left Pane: Form */}
-      <form onSubmit={handleSubmit} className="px-4 overflow-y-auto max-h-[calc(100vh-250px)] overflow-y-auto scrollbar-hide">
+      <form onSubmit={handleSubmit} className="px-4 mb-8 overflow-y-auto max-h-[calc(100vh-250px)] overflow-y-auto scrollbar-hide">
         {/* Full Name */}
         <div>
           <label className="block mb-2 text-sm font-medium">Full Name</label>

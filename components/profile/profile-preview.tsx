@@ -35,7 +35,7 @@ export function ProfilePreview({
       case 2:
         return <PortfolioLayout2 profile={profile} />
       case 3:
-        return <PortfolioLayout3 profile={profile} />
+        return <PortfolioLayout3 profile={profile} isPreview={true} />
       case 1:
       default:
         return <PortfolioLayout1 profile={profile} />
@@ -44,7 +44,7 @@ export function ProfilePreview({
 
 
    return (
-    <div className="relative w-full h-full overflow-hidden bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
+    <div className="w-full h-full overflow-hidden bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
       <div className="w-full h-full overflow-y-auto">
         {renderPortfolio()}
       </div>

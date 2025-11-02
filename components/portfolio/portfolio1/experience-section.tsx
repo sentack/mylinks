@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from "react"
 
 interface Experience {
-  company_name: string
-  role_title: string
+  company: string
+  position: string
   start_date: string
   end_date: string
   description: string
@@ -62,8 +62,8 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                 <div className="absolute left-5 top-2 w-6 h-6 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full border-4 border-white dark:border-gray-900 shadow-lg animate-pulse" />
 
                 <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-gray-800 dark:to-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{exp.role_title}</h3>
-                  <p className="text-xl text-blue-600 dark:text-blue-400 font-semibold mb-2">{exp.company_name}</p>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{exp.position}</h3>
+                  <p className="text-xl text-blue-600 dark:text-blue-400 font-semibold mb-2">{exp.company}</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 font-medium">
                     {exp.start_date} — {exp.end_date}
                   </p>

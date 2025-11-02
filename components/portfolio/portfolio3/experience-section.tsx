@@ -1,6 +1,6 @@
 interface Experience {
-  company_name: string
-  role_title: string
+  company: string
+  position: string
   start_date: string
   end_date: string
   description: string
@@ -26,9 +26,9 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
               <div className="absolute -left-2 sm:-left-3 top-0 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full shadow-lg shadow-indigo-500/50" />
 
               <div className="p-4 sm:p-6 rounded-lg bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 border border-indigo-200 dark:border-indigo-800">
-                <h3 className="text-lg sm:text-xl font-semibold text-black dark:text-white">{exp.role_title}</h3>
+                <h3 className="text-lg sm:text-xl font-semibold text-black dark:text-white">{exp.position}</h3>
                 <p className="text-base sm:text-lg text-indigo-600 dark:text-indigo-400 font-medium">
-                  {exp.company_name}
+                  {exp.company}
                 </p>
                 <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1">
                   {exp.start_date} — {exp.end_date}

@@ -3,10 +3,9 @@
 import { useEffect, useRef, useState } from "react"
 
 interface Education {
-  institution_name: string
-  degree_or_field: string
-  start_date: string
-  end_date: string
+  school: string
+  degree: string
+  graduation_year: string
 }
 
 interface EducationSectionProps {
@@ -66,13 +65,13 @@ export function EducationSection({ education }: EducationSectionProps) {
                 </div>
 
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-                  {edu.degree_or_field}
+                  {edu.degree}
                 </h3>
 
-                <p className="text-lg text-gray-700 dark:text-gray-300 font-semibold mb-2">{edu.institution_name}</p>
+                <p className="text-lg text-gray-700 dark:text-gray-300 font-semibold mb-2">{edu.school}</p>
 
                 <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
-                  {edu.start_date} — {edu.end_date}
+                  {edu.graduation_year}
                 </p>
               </div>
             </div>

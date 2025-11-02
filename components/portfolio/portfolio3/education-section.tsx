@@ -1,8 +1,7 @@
 interface Education {
-  institution_name: string
-  degree_or_field: string
-  start_date: string
-  end_date: string
+  school: string
+  degree: string
+  graduation_year: string
 }
 
 interface EducationSectionProps {
@@ -31,13 +30,13 @@ export function EducationSection({ education }: EducationSectionProps) {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="text-base sm:text-xl font-semibold text-black dark:text-white break-words">
-                    {edu.degree_or_field}
+                    {edu.degree}
                   </h3>
                   <p className="text-sm sm:text-lg text-pink-600 dark:text-pink-400 font-medium break-words">
-                    {edu.institution_name}
+                    {edu.school}
                   </p>
                   <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-2">
-                    {edu.start_date} — {edu.end_date}
+                    {edu.graduation_year}
                   </p>
                 </div>
               </div>

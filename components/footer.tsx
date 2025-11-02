@@ -1,4 +1,5 @@
-import { LinkIcon, Mail, Github, Twitter, Linkedin, Coffee, Heart } from "lucide-react"
+import { LinkIcon, Mail, Github,  Linkedin, Coffee, Heart } from "lucide-react"
+import { FaXTwitter } from 'react-icons/fa6';
 import Link from "next/link"
 
 export function Footer() {
@@ -81,9 +82,9 @@ export function Footer() {
               <a
                 href="#"
                 className="p-2 bg-gray-900 hover:bg-gray-800 rounded-lg transition-colors"
-                aria-label="Twitter"
+                aria-label="X"
               >
-                <Twitter className="w-5 h-5" />
+                <FaXTwitter className="w-5 h-5" />
               </a>
               <a
                 href="#"

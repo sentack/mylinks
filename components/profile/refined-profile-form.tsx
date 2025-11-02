@@ -49,6 +49,7 @@ export function RefinedProfileForm({ userId }: RefinedProfileFormProps) {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+  const [skillsInput, setSkillsInput] = useState(""); //temporary input
   const [formData, setFormData] = useState({
     full_name: "",
     username: "",
@@ -131,6 +132,7 @@ export function RefinedProfileForm({ userId }: RefinedProfileFormProps) {
           cover_image: data.cover_image || "",
         })
       }
+      setSkillsInput(data.skills.join(", "))
       setLoading(false)
     }
 
@@ -177,16 +179,22 @@ export function RefinedProfileForm({ userId }: RefinedProfileFormProps) {
   }
 
   const handleSkillsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    const skillsArray = value
+    setSkillsInput(e.target.value); // update string as user types
+  };
+
+  const handleSkillsBlur = () => {
+    // Convert string to array on blur (or submit)
+    const skillsArray = skillsInput
       .split(",")
       .map((skill) => skill.trim())
-      .filter((skill) => skill)
+      .filter((skill) => skill);
+
     setFormData((prev) => ({
       ...prev,
       skills: skillsArray,
-    }))
-  }
+    }));
+  };
+
 
   const addWorkExperience = () => {
     setFormData((prev) => ({
@@ -459,8 +467,9 @@ export function RefinedProfileForm({ userId }: RefinedProfileFormProps) {
           <label className="block mb-2 text-sm font-medium">Skills & Specialization</label>
           <input
             type="text"
-            value={formData.skills.join(", ")}
+            value={skillsInput}
             onChange={handleSkillsChange}
+            onBlur={handleSkillsBlur}
             className="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg p-3 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
             placeholder="e.g., React, Next.js, TypeScript (comma-separated)"
           />

@@ -160,7 +160,7 @@ export default function Dashboard() {
               >
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Email Address</p>
                 <p className="text-lg font-semibold truncate">{user?.email}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">Verified</p>
+                <p className="text-xs text-gray-500 dark:text-gray-500 mt-2 inline-flex gap-2">Verified <span><CheckCircle className="text-blue-600" size={15} /></span></p>
               </motion.div>
 
               {/* Display Type Card */}

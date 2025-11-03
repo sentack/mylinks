@@ -36,7 +36,7 @@ export function ContactSection({ email, phone, socialLinks }: ContactSectionProp
     instagram: <FaInstagram className="w-6 h-6" />,
     twitter: <FaXTwitter className="w-6 h-6" />,
     linkedin: <FaLinkedin className="w-6 h-6" />,
-    discord: <FaDiscord className="w-6 h-6" />,
+    discord: <FaDiscord className="w-6 h-6" />, 
     github: <FaGithub className="w-6 h-6" />,
   };
 

@@ -19,7 +19,7 @@ export function Terms() {
 
   return (
     <section ref={ref} className="py-20 bg-white dark:bg-black">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial="hidden" animate={isInView ? "visible" : "hidden"} className="space-y-8">
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="text-4xl font-bold text-black dark:text-white">Terms of Service</h2>

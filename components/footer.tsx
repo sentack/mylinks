@@ -13,12 +13,14 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-2xl font-bold">
-              <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg">
-                <LinkIcon className="w-5 h-5" />
+              <div className="rounded-full">
+                <img className="w-10 h-10" src="/favicon.ico" />
               </div>
               MyLinks
             </div>
-            <p className="text-gray-400">Share your links with the world. Simple, fast, and completely free.</p>
+            <p className="text-gray-400">
+              Design your portfolio and business card easily. One click, and you're online.
+            </p>
           </div>
 
           {/* Product */}

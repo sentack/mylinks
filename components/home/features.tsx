@@ -1,43 +1,49 @@
 "use client"
 
-import { Link2, Zap, Palette, BarChart3, Lock, Globe } from "lucide-react"
+import { LayoutDashboard, Palette, IdCard, QrCode, BarChart3, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
 
 const features = [
   {
-    icon: Link2,
-    title: "All Your Links in One Place",
+    icon: LayoutDashboard,
+    title: "Instant Portfolio Creation",
     description:
-      "Keep all your important links, social profiles, and content organized in a single, beautiful landing page.",
+      "Build a stunning portfolio site without coding. Just add your info, pick a design, and go live instantly.",
   },
   {
     icon: Palette,
-    title: "Fully Customizable",
-    description: "Choose from multiple themes, colors, and layouts. Make it truly yours with custom branding.",
+    title: "Multiple Design Choices",
+    description:
+      "Explore a wide range of professional templates, colors, and layouts. Personalize your style effortlessly.",
   },
   {
-    icon: Zap,
-    title: "Lightning Fast",
-    description: "Optimized for speed. Your link hub loads instantly, no matter where your audience is.",
+    icon: IdCard,
+    title: "Digital Business Cards",
+    description:
+      "Create and download sleek business cards from beautiful templates. Perfect for professionals and creators.",
+  },
+  {
+    icon: QrCode,
+    title: "QR Code Sharing",
+    description:
+      "Share your portfolio or business card instantly using a unique QR code. Quick and convenient for networking.",
   },
   {
     icon: BarChart3,
-    title: "Analytics & Insights",
-    description: "Track clicks, view statistics, and understand which links drive the most engagement.",
+    title: "Analytics & Engagement",
+    description:
+      "Monitor your portfolio performance with real-time stats to see who visits and interacts with your content.",
   },
   {
-    icon: Lock,
-    title: "Secure & Reliable",
-    description: "Enterprise-grade security ensures your links and data are always protected.",
+    icon: ShieldCheck,
+    title: "Fast, Secure & Reliable",
+    description:
+      "Optimized for speed and backed by enterprise-level security to keep your data safe and always available.",
   },
-  {
-    icon: Globe,
-    title: "SEO Optimized",
-    description: "Built with SEO best practices. Your link hub ranks well in search results.",
-  },
-]
+];
+
 
 export function Features() {
   const ref = useRef(null)

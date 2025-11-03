@@ -30,46 +30,47 @@ export function Pricing() {
   }
 
   const plans = [
-    {
-      name: "Free",
-      price: "0",
-      description: "Perfect to get started",
-      features: ["Up to 50 links", "Basic analytics", "Standard design", "Community support", "Mobile responsive"],
-    },
-    {
-      name: "Pro",
-      price: "9.99",
-      description: "For professionals",
-      features: [
-        "Unlimited links",
-        "Advanced analytics",
-        "Custom design",
-        "Priority support",
-        "Mobile responsive",
-        "Custom domain",
-        "Bio section",
-      ],
-      featured: true,
-    },
-    {
-      name: "Enterprise",
-      price: "Custom",
-      description: "For large teams",
-      features: [
-        "Everything in Pro",
-        "Team collaboration",
-        "Advanced security",
-        "Dedicated support",
-        "API access",
-        "White label",
-        "Custom integrations",
-      ],
-    },
-  ]
+  {
+    name: "Free",
+    price: "0 ETB",
+    description: "Perfect to get started",
+    features: ["Up to 50 links", "Basic analytics", "Standard design", "Community support", "Mobile responsive"],
+  },
+  {
+    name: "Pro",
+    price: "1500 ETB",
+    description: "For professionals",
+    features: [
+      "Unlimited links",
+      "Advanced analytics",
+      "Custom design",
+      "Priority support",
+      "Mobile responsive",
+      "Custom domain",
+      "Bio section",
+    ],
+    featured: true,
+  },
+  {
+    name: "Enterprise",
+    price: "5000 ETB",
+    description: "For large teams",
+    features: [
+      "Everything in Pro",
+      "Team collaboration",
+      "Advanced security",
+      "Dedicated support",
+      "API access",
+      "White label",
+      "Custom integrations",
+    ],
+  },
+];
+
 
   return (
     <section ref={ref} className="py-20 bg-gradient-to-b from-white to-blue-50 dark:from-black dark:to-slate-900">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -113,7 +114,7 @@ export function Pricing() {
                 </p>
 
                 <div className="mb-6">
-                  <span className="text-5xl font-bold">${plan.price}</span>
+                  <span className="text-5xl font-bold">{plan.price}</span>
                   {plan.price !== "Custom" && (
                     <span className={plan.featured ? "text-blue-100" : "text-gray-600 dark:text-gray-400"}>/month</span>
                   )}

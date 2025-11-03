@@ -7,28 +7,31 @@ import { useRef } from "react"
 
 const testimonials = [
   {
-    name: "Sarah Chen",
+    name: "Lidya Mekonnen",
     role: "Content Creator",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
-    content: "MyLinks transformed how I share my content. All my links in one beautiful place. My followers love it!",
-    rating: 5,
-  },
-  {
-    name: "Marcus Johnson",
-    role: "Digital Marketer",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Marcus",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Lidya",
     content:
-      "The analytics feature is incredible. I can see exactly which links drive the most traffic. Highly recommended!",
+      "This platform completely changed how I share my work. My portfolio looks modern and professional. My audience loves it!",
     rating: 5,
   },
   {
-    name: "Emma Williams",
-    role: "Freelancer",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emma",
-    content: "Professional, easy to use, and completely free. This is exactly what I needed for my portfolio.",
+    name: "Nahom Bekele",
+    role: "Digital Marketer",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Nahom",
+    content:
+      "The analytics feature is amazing! I can track who visits my site and which links perform best. Highly recommended!",
     rating: 5,
   },
-]
+  {
+    name: "Hana Tesfaye",
+    role: "Freelance Designer",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Hana",
+    content:
+      "It’s so easy to use and looks so clean. I built my portfolio in minutes without any coding. Love it!",
+    rating: 5,
+  },
+];
+
 
 export function Testimonials() {
   const ref = useRef(null)

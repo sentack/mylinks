@@ -77,13 +77,12 @@ export function Hero({ user, loading }: HeroProps) {
           <motion.div variants={itemVariants} className="space-y-6">
             <h1 className="text-6xl md:text-7xl font-bold text-balance leading-tight">
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
-                Share Your Links
+                Launch Your Portfolio
               </span>
-              <span className="block text-black dark:text-white">Like Never Before</span>
+              <span className="block text-black dark:text-white">In One Click</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 text-balance max-w-2xl mx-auto leading-relaxed">
-              Create a stunning link hub in seconds. One beautiful page for all your important links, social profiles,
-              and content.
+              "From template to live site in minutes. Showcase your talent without touching a single line of code.
             </p>
           </motion.div>
 
@@ -130,12 +129,12 @@ export function Hero({ user, loading }: HeroProps) {
             className="pt-8 flex flex-col md:flex-row gap-8 justify-center items-center text-center md:text-left"
           >
             <div className="flex-1">
-              <p className="text-3xl font-bold text-black dark:text-white">50K+</p>
+              <p className="text-3xl font-bold text-black dark:text-white">10+</p>
               <p className="text-gray-600 dark:text-gray-400">Active Users</p>
             </div>
             <div className="flex-1">
-              <p className="text-3xl font-bold text-black dark:text-white">1M+</p>
-              <p className="text-gray-600 dark:text-gray-400">Links Shared</p>
+              <p className="text-3xl font-bold text-black dark:text-white">10+</p>
+              <p className="text-gray-600 dark:text-gray-400">Live Portfolios</p>
             </div>
             <div className="flex-1">
               <p className="text-3xl font-bold text-black dark:text-white">99.9%</p>

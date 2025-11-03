@@ -19,7 +19,7 @@ export function Privacy() {
 
   return (
     <section ref={ref} className="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-black dark:to-slate-900">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial="hidden" animate={isInView ? "visible" : "hidden"} className="space-y-8">
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="text-4xl font-bold text-black dark:text-white">Privacy Policy</h2>

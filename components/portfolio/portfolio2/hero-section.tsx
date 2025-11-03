@@ -34,7 +34,7 @@ export function HeroSection({ fullName, position, bio, profilePictureUrl, accent
           >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl blur-2xl opacity-30" />
-              <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-2xl overflow-hidden border-2 border-orange-500/50 shadow-2xl">
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden border-2 border-orange-500/50 shadow-2xl">
                 {profilePictureUrl ? (
                   <img
                     src={profilePictureUrl || "/placeholder.svg"}

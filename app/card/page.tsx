@@ -14,6 +14,9 @@ import Card2 from "@/components/cards/card2"
 import Card3 from "@/components/cards/card3"
 import Card4 from "@/components/cards/card4"
 import Card5 from "@/components/cards/card5"
+import Card6 from "@/components/cards/card6"
+import Card7 from "@/components/cards/card7"
+import Card8 from "@/components/cards/card8"
 import { motion } from "framer-motion"
 import { Download, FileText, ArrowLeft } from "lucide-react"
 import Link from "next/link"
@@ -33,6 +36,9 @@ const DISPLAY_TYPES = [
   { name: "Curved Accent", value: "3" },
   { name: "Geometric Blend", value: "4" },
   { name: "Angular Modern", value: "5" },
+  { name: "Minimal Contact", value: "6" },
+  { name: "Creative Split", value: "7" },
+  { name: "Connect Bold", value: "8" },
 ]
 
 const cards = {
@@ -41,6 +47,9 @@ const cards = {
   "3": Card3,
   "4": Card4,
   "5": Card5,
+  "6": Card6,
+  "7": Card7,
+  "8": Card8,
 }
 
 export default function CustomizePage() {
@@ -59,6 +68,7 @@ export default function CustomizePage() {
     accent_color: "bg-blue-500",
     background_theme: "light",
     display_type: "1",
+    company_slogan: "", // Added company slogan field
   })
 
   useEffect(() => {
@@ -85,6 +95,7 @@ export default function CustomizePage() {
           accent_color: profileData.accent_color || "bg-blue-500",
           background_theme: profileData.background_theme || "light",
           display_type: profileData.display_type || "1",
+          company_slogan: profileData.company_slogan || "", // Load company slogan
         })
       }
 
@@ -128,6 +139,7 @@ export default function CustomizePage() {
         accent_color: customization.accent_color,
         background_theme: customization.background_theme,
         display_type: customization.display_type,
+        company_slogan: customization.company_slogan, // Save company slogan
         updated_at: new Date().toISOString(),
       })
       .eq("id", user.id)
@@ -206,7 +218,7 @@ export default function CustomizePage() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, transition: { duration: 0.5, ease: ("easeOut" as unknown) as any }},
+      transition: { duration: 0.8, transition: { duration: 0.5, ease: "easeOut" as unknown as any } },
     },
   }
 
@@ -278,6 +290,22 @@ export default function CustomizePage() {
                     </div>
                   )}
                 </div>
+              </div>
+
+              <div className="space-y-4">
+                <h2 className="text-xl font-bold">Company Slogan</h2>
+                <input
+                  type="text"
+                  value={customization.company_slogan}
+                  onChange={(e) =>
+                    setCustomization((prev) => ({
+                      ...prev,
+                      company_slogan: e.target.value,
+                    }))
+                  }
+                  placeholder="e.g., Innovation & Excellence"
+                  className="w-full border-2 border-gray-300 dark:border-gray-700 rounded-lg p-3 text-black dark:text-white dark:bg-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                />
               </div>
 
               {/* Display Type Selection */}
@@ -391,16 +419,13 @@ export default function CustomizePage() {
               <h2 className="text-xl font-bold">Live Preview</h2>
               <div
                 ref={contentRef}
-                className={`p-8 rounded-xl transition-all duration-300 shadow-xl ${
-                  customization.background_theme === "dark"
-                    ? "bg-black border border-gray-700"
-                    : "bg-white border border-gray-300"
-                }`}
+                className={`bg-white`}
               >
                 <SelectedCard
                   profile={profileWithLogo}
                   accentColor={customization.accent_color}
                   backgroundTheme={customization.background_theme}
+                  companySlogan={customization.company_slogan} // Pass company slogan to the card component
                 />
               </div>
 

@@ -69,11 +69,11 @@ export function PortfolioLayout4({ profile }: PortfolioLayout4Props) {
       {/* Mobile Header */}
       <div className="lg:hidden sticky top-0 z-40 flex items-center justify-between gap-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-4 py-4 border-b border-gray-200 dark:border-slate-800">
         <Link
-          href="/"
-          className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent"
-        >
-          MyLinks
-        </Link>
+              href="/"
+              className="flex justify-start text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+            >
+              MyLinks
+            </Link>
         <div className="flex items-center gap-3">
           <ThemeToggle />
           <button
@@ -114,7 +114,7 @@ export function PortfolioLayout4({ profile }: PortfolioLayout4Props) {
           <div className="flex items-center justify-between mb-12">
             <Link
               href="/"
-              className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent"
+              className="flex justify-start text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
             >
               MyLinks
             </Link>

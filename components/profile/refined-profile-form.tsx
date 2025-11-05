@@ -836,6 +836,7 @@ export function RefinedProfileForm({ userId }: RefinedProfileFormProps) {
       {/* Right Pane: Live Preview */}
       <div className="px-4 max-h-[calc(100vh-250px)] overflow-y-auto border-gray-300 scrollbar-hide">
           <ProfilePreview
+            username={formData.username}
             profile={formData}
             profileViewType={formData.layout_type}
           />

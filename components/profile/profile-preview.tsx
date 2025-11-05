@@ -2,17 +2,17 @@
 
 import type React from "react"
 import { Navbar } from "@/components/navbar"
-import { PortfolioLayout1 } from "@/components/portfolio/portfolio-layout-1"
-import { PortfolioLayout2 } from "@/components/portfolio/portfolio-layout-2"
-import { PortfolioLayout3 } from "@/components/portfolio/portfolio-layout-3"
+import { useEffect, useState } from "react"
 
 interface ProfilePreviewProps {
+  username: String
   profile: {}
   profileViewType: Number
 }
 
 
 export function ProfilePreview({
+  username,
   profile,
   profileViewType,
 }: ProfilePreviewProps) {
@@ -30,24 +30,28 @@ export function ProfilePreview({
     )
   }
 
-  const renderPortfolio = () => {
-    switch (profileViewType) {
-      case 2:
-        return <PortfolioLayout2 profile={profile} />
-      case 3:
-        return <PortfolioLayout3 profile={profile} isPreview={true} />
-      case 1:
-      default:
-        return <PortfolioLayout1 profile={profile} />
-    }
-  }
+  const [iframeKey, setIframeKey] = useState(0);
+
+  useEffect(()=>{
+     setIframeKey((prev) => prev + 1);    
+  }, [profileViewType])
 
 
-   return (
-    <div className="w-full h-full overflow-hidden bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
-      <div className="w-full h-full overflow-y-auto">
-        {renderPortfolio()}
-      </div>
-    </div>
-  )
+return (
+  <div className="w-full h-full overflow-hidden bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
+    <iframe
+      key={iframeKey}
+      src={`/u/${username}`}
+      title={`${username}'s Portfolio`}
+      className="w-full h-full border-0"
+      sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+      loading="lazy"
+      style={{
+        background: "white",
+        isolation: "isolate",
+      }}
+    ></iframe>
+  </div>
+);
+
 }

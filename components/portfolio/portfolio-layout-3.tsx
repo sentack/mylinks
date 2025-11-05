@@ -27,36 +27,6 @@ export function PortfolioLayout3({isPreview = false, profile }: PortfolioLayout3
     }
   }
 
-  useEffect(() => {
-    // This function is here only for the preview section of this portfolio inside profile update, It works fine when not in previwe mode
-  // This is just a simple bypass I used to make the preview better on the mobile screens
-    if (!isPreview) return; // Only run this logic in preview mode
-
-  const container = document.getElementById("preview-container");
-  if (!container) return; // prevent null errors
-
-  if (sidebarOpen) {
-    // Scroll smoothly to the preview container
-    container.scrollIntoView({ behavior: "smooth", block: "start",  });
-
-    setTimeout(() => {
-      window.scrollBy({ top: -50, behavior: "smooth" });
-    }, 300);
-
-    // Disable scrolling
-    container.style.overflow = "hidden";
-  } else {
-    // Restore scrolling
-    container.style.overflow = "";
-    document.body.style.overflow = "";
-  }
-
-  return () => {
-    container.style.overflow = "";
-    document.body.style.overflow = "";
-  };
-}, [sidebarOpen, isPreview]);
-
 
   return (
     <div  id="preview-container" className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-black dark:to-indigo-950 text-black dark:text-white transition-colors duration-300">
@@ -141,8 +111,8 @@ export function PortfolioLayout3({isPreview = false, profile }: PortfolioLayout3
       {/* Mobile Sidebar */}
       {sidebarOpen && (
         <div className="relative z-50 lg:hidden">
-          <div className={`${!isPreview ? "fixed inset-0" : "absolute top-0 w-full h-screen"} bg-gray-900/80 `} onClick={() => setSidebarOpen(false)} />
-          <div className={`${!isPreview ? "fixed inset-0" : "absolute h-screen w-full top-0 left-0"} flex`}>
+          <div className="fixed inset-0 bg-gray-900/80" onClick={() => setSidebarOpen(false)} />
+          <div className="fixed inset-0 flex">
             <div className="relative mr-16 flex w-full max-w-xs flex-1">
               <div className="absolute left-full top-0 flex w-16 justify-center pt-5">
                 <button type="button" className="-m-2.5 p-2.5" onClick={() => setSidebarOpen(false)}>

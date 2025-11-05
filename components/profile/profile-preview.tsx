@@ -38,7 +38,7 @@ export function ProfilePreview({
 
 
 return (
-  <div className="w-full h-full overflow-hidden bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
+  <div className="w-full h-screen overflow-hidden bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
     <iframe
       key={iframeKey}
       src={`/u/${username}`}

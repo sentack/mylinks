@@ -10,6 +10,7 @@ export function ViewSelector({ selectedView, onViewChange }: ViewSelectorProps) 
     { id: 1, label: "Portfolio 1", description: "Centered, elegant layout" },
     { id: 2, label: "Portfolio 2", description: "Clean and simple" },
     { id: 3, label: "Portfolio 3", description: "Modern with accent bar" },
+ { id: 4, label: "Portfolio 4", description: "Black and White Alternative" },
   ] as const
 
   return (

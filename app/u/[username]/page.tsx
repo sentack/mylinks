@@ -3,6 +3,7 @@ import { Navbar } from "@/components/navbar"
 import { PortfolioLayout1 } from "@/components/portfolio/portfolio-layout-1"
 import { PortfolioLayout2 } from "@/components/portfolio/portfolio-layout-2"
 import { PortfolioLayout3 } from "@/components/portfolio/portfolio-layout-3"
+import { PortfolioLayout4 } from "@/components/portfolio/portfolio-layout-4"
 
 interface PublicProfilePageProps {
   params: Promise<{
@@ -36,6 +37,8 @@ export default async function PublicProfilePage({ params }: PublicProfilePagePro
         return <PortfolioLayout2 profile={profile} />
       case 3:
         return <PortfolioLayout3 profile={profile} />
+      case 4:
+        return <PortfolioLayout4 profile={profile} />
       case 1:
       default:
         return <PortfolioLayout1 profile={profile} />

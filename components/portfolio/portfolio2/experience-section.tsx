@@ -41,23 +41,25 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
     <section
       ref={sectionRef}
       id="experience"
-      className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-gray-900 to-black overflow-hidden"
+      className="relative py-32 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-900 overflow-hidden"
     >
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-slate-800 dark:via-slate-900 dark:to-slate-900" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(168,85,247,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
 
       <div className="relative max-w-5xl mx-auto">
         <div
           className={`text-center mb-20 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
         >
-          <h2 className="text-5xl sm:text-6xl font-black text-white mb-6">
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Journey</span>
+          <h2 className="text-5xl sm:text-6xl font-black text-gray-900 dark:text-white mb-6">
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+              Journey
+            </span>
           </h2>
-          <div className="w-32 h-2 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 mx-auto" />
+          <div className="w-32 h-2 bg-gradient-to-r from-blue-600 via-purple-500 to-blue-500 dark:from-purple-500 dark:via-pink-500 dark:to-orange-500 mx-auto" />
         </div>
 
         <div className="relative">
-          {/* Vertical timeline with gradient */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 via-pink-500 to-orange-500 transform md:-translate-x-1/2" />
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 via-purple-500 to-blue-500 dark:from-purple-500 dark:via-pink-500 dark:to-orange-500 transform md:-translate-x-1/2" />
 
           <div className="space-y-16">
             {experiences.map((exp, idx) => (
@@ -69,26 +71,27 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                 <div
                   className={`flex flex-col md:flex-row items-center gap-8 ${idx % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
                 >
-                  {/* Timeline dot */}
-                  <div className="absolute left-0 md:left-1/2 w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full border-4 border-black transform md:-translate-x-1/2 shadow-[0_0_20px_rgba(168,85,247,0.5)] animate-pulse" />
+                  <div className="absolute left-0 md:left-1/2 w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 dark:from-purple-500 dark:to-pink-500 rounded-full border-4 border-white dark:border-black transform md:-translate-x-1/2 shadow-[0_0_20px_rgba(59,130,246,0.5)] dark:shadow-[0_0_20px_rgba(168,85,247,0.5)] animate-pulse" />
 
                   {/* Content card */}
                   <div
                     className={`w-full md:w-5/12 ${idx % 2 === 0 ? "md:text-right md:pr-16" : "md:pl-16"} ml-12 md:ml-0`}
                   >
-                    <div className="group relative bg-gradient-to-br from-gray-900 to-black p-8 border-2 border-purple-500/30 hover:border-pink-500 rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-500">
+                    <div className="group relative bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-black p-8 border-2 border-blue-200 dark:border-purple-500/30 hover:border-blue-600 dark:hover:border-pink-500 rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-500 shadow-lg dark:shadow-none">
                       {/* Glow effect */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 to-pink-600/0 group-hover:from-purple-600/10 group-hover:to-pink-600/10 transition-all duration-500" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/0 to-purple-600/0 dark:from-purple-600/0 dark:to-pink-600/0 group-hover:from-blue-600/5 group-hover:to-purple-600/5 dark:group-hover:from-purple-600/10 dark:group-hover:to-pink-600/10 transition-all duration-500" />
 
                       <div className="relative">
-                        <h3 className="text-2xl font-black text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all duration-300">
+                        <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 dark:group-hover:from-purple-400 group-hover:to-purple-600 dark:group-hover:to-pink-400 group-hover:bg-clip-text transition-all duration-300">
                           {exp.position}
                         </h3>
-                        <p className="text-xl text-purple-400 font-bold mb-3">{exp.company}</p>
-                        <p className="text-sm text-gray-500 font-bold mb-4 uppercase tracking-wider">
+                        <p className="text-xl text-blue-600 dark:text-purple-400 font-bold mb-3">{exp.company}</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-500 font-bold mb-4 uppercase tracking-wider">
                           {exp.start_date} — {exp.end_date}
                         </p>
-                        {exp.description && <p className="text-gray-400 leading-relaxed">{exp.description}</p>}
+                        {exp.description && (
+                          <p className="text-gray-700 dark:text-gray-400 leading-relaxed">{exp.description}</p>
+                        )}
                       </div>
                     </div>
                   </div>

@@ -8,77 +8,81 @@ import { EducationSection } from "./portfolio1/education-section"
 import { ProjectsSection } from "./portfolio1/projects-section"
 import { ContactSection } from "./portfolio1/contact-section"
 import { ThemeToggle } from "@/components/theme-toggle"
-
+import { useState } from "react"
 import Link from "next/link"
+import { Menu, X } from "lucide-react"
 
 interface PortfolioLayout1Props {
   profile: any
 }
 
 export function PortfolioLayout1({ profile }: PortfolioLayout1Props) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const navItems = [
+    { label: "About", href: "#about" },
+    ...(profile.services && profile.services.length > 0 ? [{ label: "Services", href: "#services" }] : []),
+    ...(profile.work_experience && profile.work_experience.length > 0
+      ? [{ label: "Experience", href: "#experience" }]
+      : []),
+    ...(profile.education && profile.education.length > 0 ? [{ label: "Education", href: "#education" }] : []),
+    ...(profile.projects && profile.projects.length > 0 ? [{ label: "Projects", href: "#projects" }] : []),
+    { label: "Contact", href: "#contact" },
+  ]
+
   return (
     <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
       {/* Sticky Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div  className="flex items-center justify-between gap-4">
-             <Link
-            href="/"
-            className="flex justufy-start text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
-          >
-            MyLinks
-          </Link>
           <div className="flex items-center justify-between gap-4">
-            <div className="flex gap-4 sm:gap-8 overflow-x-auto scrollbar-hide flex-1">
-              
-              <a
-                href="#about"
-                className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition whitespace-nowrap"
+            <Link
+              href="/"
+              className="flex justify-start text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+            >
+              MyLinks
+            </Link>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center justify-center gap-8 flex-1 ml-8">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+
+            {/* Mobile Menu Button and Theme Toggle */}
+            <div className="flex items-center gap-4">
+              <ThemeToggle />
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 transition"
               >
-                About
-              </a>
-              {profile.services && profile.services.length > 0 && (
-                <a
-                  href="#services"
-                  className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition whitespace-nowrap"
-                >
-                  Services
-                </a>
-              )}
-              {profile.work_experience && profile.work_experience.length > 0 && (
-                <a
-                  href="#experience"
-                  className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition whitespace-nowrap"
-                >
-                  Experience
-                </a>
-              )}
-              {profile.education && profile.education.length > 0 && (
-                <a
-                  href="#education"
-                  className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition whitespace-nowrap"
-                >
-                  Education
-                </a>
-              )}
-              {profile.projects && profile.projects.length > 0 && (
-                <a
-                  href="#projects"
-                  className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition whitespace-nowrap"
-                >
-                  Projects
-                </a>
-              )}
-              <a
-                href="#contact"
-                className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition whitespace-nowrap"
-              >
-                Contact
-              </a>
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
             </div>
           </div>
-            <ThemeToggle />
-          </div>          
+
+          {/* Mobile Navigation Menu */}
+          {isMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 space-y-2 border-t border-gray-200 dark:border-gray-800 pt-4">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="block px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-900 transition"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </nav>
 
@@ -139,8 +143,6 @@ export function PortfolioLayout1({ profile }: PortfolioLayout1Props) {
           socialLinks={profile.social_links || {}}
         />
       </div>
-
-      
     </div>
   )
 }

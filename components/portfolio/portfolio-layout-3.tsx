@@ -11,6 +11,7 @@ import { ContactSection } from "./portfolio3/contact-section"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Menu, X, User, Briefcase, GraduationCap, FolderOpen, Mail, Wrench } from "lucide-react"
 
+import Link from "next/link"
 interface PortfolioLayout3Props {
   isPreview?: boolean;
   profile: any
@@ -34,9 +35,12 @@ export function PortfolioLayout3({isPreview = false, profile }: PortfolioLayout3
       <aside className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-50 lg:block lg:w-64 lg:overflow-y-auto lg:bg-white/80 lg:dark:bg-gray-900/80 lg:backdrop-blur-md lg:border-r lg:border-gray-200 lg:dark:border-gray-800">
         <div className="flex h-full flex-col gap-y-5 px-6 py-8">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
-              Portfolio
-            </h2>
+             <Link
+            href="/"
+            className="flex justufy-start text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+          >
+            MyLinks
+          </Link>
             <ThemeToggle />
           </div>
           <nav className="flex flex-1 flex-col">
@@ -121,9 +125,12 @@ export function PortfolioLayout3({isPreview = false, profile }: PortfolioLayout3
               </div>
               <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white dark:bg-gray-900 px-6 pb-4">
                 <div className="flex h-16 shrink-0 items-center">
-                  <h2 className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
-                    Portfolio
-                  </h2>
+                   <Link
+            href="/"
+            className="flex justufy-start text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+          >
+            MyLinks
+          </Link>
                 </div>
                 <nav className="flex flex-1 flex-col">
                   <ul className="flex flex-1 flex-col gap-y-2">
@@ -206,7 +213,12 @@ export function PortfolioLayout3({isPreview = false, profile }: PortfolioLayout3
         >
           <Menu className="h-6 w-6" />
         </button>
-        <div className="flex-1 text-sm font-semibold leading-6 text-gray-900 dark:text-white">Portfolio</div>
+         <Link
+            href="/"
+            className="flex-1 justufy-start text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+          >
+            MyLinks
+          </Link>
         <ThemeToggle />
       </div>    
 

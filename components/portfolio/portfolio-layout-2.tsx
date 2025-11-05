@@ -9,6 +9,8 @@ import { ProjectsSection } from "./portfolio2/projects-section"
 import { ContactSection } from "./portfolio2/contact-section"
 import { ThemeToggle } from "@/components/theme-toggle"
 
+import Link from "next/link"
+
 interface PortfolioLayout2Props {
   profile: any
 }
@@ -18,7 +20,14 @@ export function PortfolioLayout2({ profile }: PortfolioLayout2Props) {
     <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
       {/* Sticky Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div  className="flex items-center justify-between gap-4">
+            <Link
+            href="/"
+            className="flex justufy-start text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+          >
+            MyLinks
+          </Link>
           <div className="flex items-center justify-between gap-4">
             <div className="flex gap-4 sm:gap-8 overflow-x-auto scrollbar-hide flex-1">
               <a
@@ -66,6 +75,7 @@ export function PortfolioLayout2({ profile }: PortfolioLayout2Props) {
                 Contact
               </a>
             </div>
+          </div>
             <ThemeToggle />
           </div>
         </div>
